@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,18 +16,16 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::resource('products', ProductController::class);
-
-// Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/', [LoginController::class, 'login'])->name('login');
 Route::post('actionlogin', [LoginController::class, 'actionlogin'])->name('actionlogin');
 
 Route::get('home', [HomeController::class, 'index'])->name('home')->middleware('auth');
 Route::get('actionlogout', [LoginController::class, 'actionlogout'])->name('actionlogout')->middleware('auth');
+
+Route::get('productslist', [ProductsController::class, 'index']);  
+Route::get('cart', [ProductsController::class, 'cart'])->name('cart');
+Route::get('add-to-cart/{id}', [ProductsController::class, 'addToCart'])->name('add.to.cart');
+Route::patch('update-cart', [ProductsController::class, 'update'])->name('update.cart');
+Route::delete('remove-from-cart', [ProductsController::class, 'remove'])->name('remove.from.cart');

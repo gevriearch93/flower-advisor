@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Session;
@@ -26,7 +23,7 @@ class LoginController extends Controller
             'email' => $request->input('email'),
             'password' => $request->input('password'),
         ];
-
+        
         if (Auth::Attempt($data)) {
             return redirect('home');
         }else{
