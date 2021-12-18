@@ -27,14 +27,28 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav navbar-right">
+                @guest
+                  @if (Route::has('login'))
+                    <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                  @endif
+
+                  @if (Route::has('Register'))
+                    <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                  @endif
+                @else
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> {{Auth::user()->email}} <span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                    <li><a>Level: {{Auth::user()->role}}</a></li>
+                    <!-- <li><a>Level: {{Auth::user()->role}}</a></li> -->
                     <li role="separator" class="divider"></li>
                     <li><a href="{{route('actionlogout')}}"><i class="fa fa-power-off"></i> Log Out</a></li>
                   </ul>
                 </li>
+                @endguest
               </ul>
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->

@@ -23,11 +23,19 @@ class LoginController extends Controller
             'email' => $request->input('email'),
             'password' => $request->input('password'),
         ];
-        
+
         if (Auth::Attempt($data)) {
-            return redirect('home');
+            if ($request->email == 'admin@admin.com') 
+            {
+                return redirect('home');
+            }
+            else
+            {
+                return redirect('productslist');
+            }
+            
         }else{
-            Session::flash('error', 'Email atau Password Salah');
+            Session::flash('error', 'Email or Password Wrong');
             return redirect('/');
         }
     }
