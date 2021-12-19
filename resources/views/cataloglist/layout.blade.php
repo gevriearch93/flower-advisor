@@ -29,7 +29,7 @@
                             @php $total += $details['Price'] * $details['quantity'] @endphp
                         @endforeach
                         <div class="col-lg-6 col-sm-6 col-6 total-section text-right">
-                            <p>Total: <span class="text-info">$ {{ $total }}</span></p>
+                            <p>Total: <span class="text-info">RP. {{ $total }}</span></p>
                         </div>
                     </div>
                     @if(session('cart'))
@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="col-lg-8 col-sm-8 col-8 cart-detail-product">
                                     <p>{{ $details['ProductName'] }}</p>
-                                    <span class="price text-info"> ${{ $details['Price'] }}</span> <span class="count"> Quantity:{{ $details['quantity'] }}</span>
+                                    <span class="price text-info"> Rp.{{ $details['Price'] }}</span> <span class="count"> Quantity:{{ $details['quantity'] }}</span>
                                 </div>
                             </div>
                         @endforeach

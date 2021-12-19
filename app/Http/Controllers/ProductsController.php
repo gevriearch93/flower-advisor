@@ -14,6 +14,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
+        Session()->forget('coupon');
         $products = Product::all();
         return view('cataloglist.products', compact('products'));
     }

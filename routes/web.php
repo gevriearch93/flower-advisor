@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CouponsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,3 +32,6 @@ Route::get('cart', [ProductsController::class, 'cart'])->name('cart');
 Route::get('add-to-cart/{id}', [ProductsController::class, 'addToCart'])->name('add.to.cart');
 Route::patch('update-cart', [ProductsController::class, 'update'])->name('update.cart');
 Route::delete('remove-from-cart', [ProductsController::class, 'remove'])->name('remove.from.cart');
+
+Route::post('coupon', [CouponsController::class, 'store'])->name('coupon.store');
+Route::delete('coupon', [CouponsController::class, 'destroy'])->name('coupon.destroy');

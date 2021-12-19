@@ -25,11 +25,11 @@
                             </div>
                         </div>
                     </td>
-                    <td data-th="Price">${{ $details['Price'] }}</td>
+                    <td data-th="Price">Rp.{{ $details['Price'] }}</td>
                     <td data-th="Quantity">
                         <input type="number" value="{{ $details['quantity'] }}" class="form-control quantity update-cart" />
                     </td>
-                    <td data-th="Subtotal" class="text-center">${{ $details['Price'] * $details['quantity'] }}</td>
+                    <td data-th="Subtotal" class="text-center">Rp.{{ $details['Price'] * $details['quantity'] }}</td>
                     <td class="actions" data-th="">
                         <button class="btn btn-danger btn-sm remove-from-cart"><i class="fa fa-trash-o"></i></button>
                     </td>
@@ -38,8 +38,27 @@
         @endif
     </tbody>
     <tfoot>
+        @if (session()->has('coupon'))
+            <tr>
+                <td colspan="4" class="text-right">Discount ({{ session()->get('coupon')['namecoupon'] }})</td>
+                <td colspan="5" class="text-right">({{ session()->get('coupon')['discountcoupon'] }})</td>
+            </tr>
+        @endif
         <tr>
-            <td colspan="5" class="text-right"><h3><strong>Total ${{ $total }}</strong></h3></td>
+            <td colspan="3" class="text-left">
+                <form action="{{ route('coupon.store') }}" method="POST">
+                    @csrf
+                    <input type="text" placeholder="Have a Code ?" name="coupon_code" id="coupon_code">
+                    <input type="hidden" placeholder="Have a Code ?" name="total_price" id="total_price" value="{{ $total }}">
+                    <button type="submit" class="btn btn-success">Apply</button>
+                </form>
+            </td>
+            @if (!session()->has('coupon'))
+            <td colspan="5" class="text-right"><h3><strong>Total Rp.{{ $total }}</strong></h3></td>
+            @endif
+            @if (session()->has('coupon'))
+            <td colspan="5" class="text-right"><h3><strong>Total Rp.{{ $total - session()->get('coupon')['discountcoupon'] }}</strong></h3></td>
+            @endif
         </tr>
         <tr>
             <td colspan="5" class="text-right">
