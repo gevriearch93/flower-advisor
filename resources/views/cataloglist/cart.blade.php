@@ -40,8 +40,13 @@
     <tfoot>
         @if (session()->has('coupon'))
             <tr>
-                <td colspan="4" class="text-right">Discount ({{ session()->get('coupon')['namecoupon'] }})</td>
-                <td colspan="5" class="text-right">({{ session()->get('coupon')['discountcoupon'] }})</td>
+                <td colspan="3" class="text-right">Discount ({{ session()->get('coupon')['namecoupon'] }}) : </td>
+                <td><form action="{{ route('coupon.destroy') }}" method="POST" style="display:inline"> 
+                {{ csrf_field() }}
+                {{ method_field('delete') }}
+                <button type="submit">Remove Coupon</button>
+                </form></td>
+                <td colspan="5" class="text-right">-Rp.({{ session()->get('coupon')['discountcoupon'] }})</td>
             </tr>
         @endif
         <tr>
