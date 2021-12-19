@@ -7,7 +7,7 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## instalation Guide
+## installation Guide
 
 - Clone Project to local environment
 - create database name it project1
